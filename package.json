@@ -1,6 +1,6 @@
 {
   "name": "generate-passphrase",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha.0",
   "description": "Secure random passphrase",
   "main": "build/index.cjs",
   "module": "build/index.js",
