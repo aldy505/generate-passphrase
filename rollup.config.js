@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import copy from 'rollup-plugin-copy';
 
 const override = { compilerOptions: { module: 'ESNext', rootDir: '.' } };
 
@@ -21,5 +22,10 @@ export default {
       include: ['./src/**/*.ts'], exclude: ['./test/**/*.ts'], clean: true, tsconfigOverride: override,
     }),
     nodeResolve(),
+    copy({
+      targets: [
+        { src: 'src/words.txt', dest: 'build' },
+      ],
+    }),
   ],
 };

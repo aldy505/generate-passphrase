@@ -16,6 +16,7 @@
   "files": [
     "build/index.cjs",
     "build/index.js",
+    "build/words.txt",
     "build/src/index.d.ts",
     "README.md",
     "LICENSE"
@@ -69,6 +70,7 @@
     "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.40.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "source-map-support": "^0.5.19",
     "ts-node": "^9.1.1",
