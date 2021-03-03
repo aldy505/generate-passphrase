@@ -1,0 +1,78 @@
+{
+  "name": "generate-passphrase",
+  "version": "0.0.0",
+  "description": "Secure random passphrase",
+  "main": "build/index.cjs",
+  "module": "build/index.js",
+  "types": "build/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "require": "./build/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
+  "files": [
+    "build/index.cjs",
+    "build/index.js",
+    "build/src/index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ignore-path .gitignore .",
+    "coverage": "nyc npm run mocha",
+    "mocha": "mocha -r ts-node/register test/**/*.spec.ts --exit",
+    "pretest": "rimraf build && npm run lint:fix && npm run build",
+    "test": "npm run coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aldy505/generate-passphrase.git"
+  },
+  "keywords": [
+    "passphrase",
+    "generate",
+    "secure",
+    "random"
+  ],
+  "author": "Reinaldy Rafli <hi@reinaldyrafli.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aldy505/generate-passphrase/issues"
+  },
+  "homepage": "https://github.com/aldy505/generate-passphrase#readme",
+  "engines": {
+    "node": ">=10"
+  },
+  "directories": {
+    "test": "./test",
+    "lib": "./src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "chai": "^4.3.1",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.3.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.40.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.2"
+  }
+}
