@@ -1,6 +1,6 @@
 # Generate Passphrase
 
-[![npm](https://img.shields.io/npm/v/generate-passphrase?style=flat-square)](https://www.npmjs.com/package/generate-passphrase) [![npm](https://img.shields.io/npm/dm/generate-passphrase?style=flat-square)](https://www.npmjs.com/package/generate-passphrase) [![Codecov](https://img.shields.io/codecov/c/github/aldy505/generate-passphrase?style=flat-square)](https://codecov.io/gh/aldy505/generate-passphrase) [![GitHub branch checks state](https://img.shields.io/github/checks-status/aldy505/generate-passphrase/master?style=flat-square)](https://github.com/aldy505/generate-passphrase/actions) [![GitHub](https://img.shields.io/github/license/aldy505/generate-passphrase?style=flat-square)](https://github.com/aldy505/generate-passphrase/blob/master/LICENSE)
+[![npm (tag)](https://img.shields.io/npm/v/generate-passphrase/next?style=flat-square)](https://www.npmjs.com/package/generate-passphrase) [![npm](https://img.shields.io/npm/dm/generate-passphrase?style=flat-square)](https://www.npmjs.com/package/generate-passphrase) [![Codecov](https://img.shields.io/codecov/c/github/aldy505/generate-passphrase?style=flat-square)](https://codecov.io/gh/aldy505/generate-passphrase) [![GitHub branch checks state](https://img.shields.io/github/checks-status/aldy505/generate-passphrase/master?style=flat-square)](https://github.com/aldy505/generate-passphrase/actions) [![GitHub](https://img.shields.io/github/license/aldy505/generate-passphrase?style=flat-square)](https://github.com/aldy505/generate-passphrase/blob/master/LICENSE)
 
 
 
@@ -15,9 +15,9 @@ ProtonMail has a [decent article](https://protonmail.com/blog/protonmail-com-blo
 Is this secure? Yes. I don't use `Math.floor`, I used the `crypto` module.
 ## Installation
 ```bash
-$ npm install generate-passphrase
+$ npm install generate-passphrase@next
 # or
-$ yarn add generate-passphrase
+$ yarn add generate-passphrase@next
 # or basically any package manager you like.
 ```
 
@@ -29,7 +29,10 @@ import { generate, generateMultiple } from 'generate-passphrase'
 const { generate, generateMultiple } = require('generate-passphrase')
 
 const passphrase = generate();
-const anotherPassphrase = generate({ length: 3, separator: '.', titlecase: true }) // see available options below
+// 'provoke-goddesshoods-26-staghorns'
+const anotherPassphrase = generate({ length: 3, separator: '.', titlecase: true }) 
+// ['pinocytotically-loricated-prithee-hypnotizer', 'sambaing-phenotypically-singlesticks-239', ... ]
+// see available options below
 
 const multiplePassphrase = generateMultiple(3)
 const anotherMultiplePassphrase = generateMultiple(10, { length: 2, uppercase: true, numbers: false })

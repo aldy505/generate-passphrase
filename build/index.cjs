@@ -60,20 +60,11 @@ function generate(options = {}) {
         titlecase: false,
         pattern: '',
     };
-    const opts = Object.assign(options, {}, options, defaults);
-    /**
-     * pseudo code:
-     * getRandomPattern() first. slice it per word.
-     * if it's N its number. call getRandomNumber()
-     *    if there's a uppercase/titlecase request, then yeah do that.
-     * if it's W its word. call getRandomWord()
-     * that returned an array.
-     * join the array with the separator.
-     */
+    const opts = { ...defaults, ...options };
     const passphraseArray = [];
     let pattern;
     if (opts.pattern) {
-        pattern = opts.pattern;
+        pattern = opts.pattern.toUpperCase();
     }
     else {
         pattern = getRandomPattern(opts.length, opts.numbers);
