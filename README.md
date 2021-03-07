@@ -31,10 +31,10 @@ const { generate, generateMultiple } = require('generate-passphrase')
 const passphrase = generate();
 // 'provoke-goddesshoods-26-staghorns'
 const anotherPassphrase = generate({ length: 3, separator: '.', titlecase: true }) 
-// ['pinocytotically-loricated-prithee-hypnotizer', 'sambaing-phenotypically-singlesticks-239', ... ]
 // see available options below
 
 const multiplePassphrase = generateMultiple(3)
+// ['pinocytotically-loricated-prithee-hypnotizer', 'sambaing-phenotypically-singlesticks-239', ... ]
 const anotherMultiplePassphrase = generateMultiple(10, { length: 2, uppercase: true, numbers: false })
 
 ```
