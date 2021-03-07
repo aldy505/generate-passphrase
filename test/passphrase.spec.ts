@@ -24,6 +24,9 @@ describe('generate-passphrase', () => {
       expect(generated[i]).to.match(/[a-zA-Z]/g);
     }
   });
+  it('should output error for unknown pattern', () => {
+    expect(() => (generate({ pattern: 'AAA' }))).to.throw('Unknown pattern found. Use N or W instead.');
+  });
   it('should generate all word pattern with pattern: WWWWW', () => {
     const generated = generate({ pattern: 'WWWWW' }).split('-');
     expect(generated.length).to.be.equal(5);

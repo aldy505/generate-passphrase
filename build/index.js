@@ -77,6 +77,9 @@ function generate(options = {}) {
                 passphraseArray.push(word);
             }
         }
+        else {
+            throw new Error('Unknown pattern found. Use N or W instead.');
+        }
     }
     const passphrase = passphraseArray.join(opts.separator);
     return passphrase;
