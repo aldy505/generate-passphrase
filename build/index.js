@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import fs from 'fs';
-import { resolve } from 'path';
+import path from 'path';
 
 let randomBytes;
 let randomIndex;
@@ -33,7 +33,7 @@ function getRandomPattern(length, numbers) {
     return pattern;
 }
 function getRandomWord() {
-    const wordsArray = fs.readFileSync(resolve(__dirname, 'words.txt'), 'utf8').split('\n');
+    const wordsArray = fs.readFileSync(path.resolve(__dirname, 'words.txt'), 'utf8').split('\n');
     const randomInt = crypto.randomInt(0, wordsArray.length);
     return wordsArray[randomInt];
 }

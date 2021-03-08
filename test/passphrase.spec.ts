@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import { assert, expect } from 'chai';
 import { describe, it } from 'mocha';
 import { generate, generateMultiple } from '../src/index';
@@ -59,5 +61,29 @@ describe('generate-passphrase', () => {
   it('should have different separator', () => {
     const generated = generate({ separator: '_' });
     expect(generated).to.include('_');
+  });
+  it('should use pattern if length is also provided', () => {
+    const generated = generate({ length: 10, pattern: 'WWNWWW' }).split('-');
+    expect(generated.length).to.be.equal(6);
+  });
+  it('should still be uppercase if titlecase is also true', () => {
+    const generated = generate({ uppercase: true, titlecase: true, numbers: false }).split('-');
+    for (let i = 0; i < generated.length; i += 1) {
+      expect(generated[i]).to.match(/[A-Z]/g);
+    }
+  });
+  it('should have all uppercase words and numbers', () => {
+    const generated = generate({ uppercase: true, titlecase: true, numbers: true }).split('-');
+    for (let i = 0; i < generated.length; i += 1) {
+      expect(generated[i]).to.match(/[0-9A-Z]/g);
+    }
+  });
+  it('should have all titlecase words and numbers', () => {
+    const generated = generate({ titlecase: true, numbers: true }).split('-');
+    for (let i = 0; i < generated.length; i += 1) {
+      const perWord = generated[i].split('');
+      expect(perWord[0]).to.match(/[0-9A-Z]/g);
+      expect(perWord[1]).to.match(/[0-9a-z]/g);
+    }
   });
 });

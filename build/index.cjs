@@ -10,6 +10,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var crypto__default = /*#__PURE__*/_interopDefaultLegacy(crypto);
 var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
+var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 
 let randomBytes;
 let randomIndex;
@@ -42,7 +43,7 @@ function getRandomPattern(length, numbers) {
     return pattern;
 }
 function getRandomWord() {
-    const wordsArray = fs__default['default'].readFileSync(path.resolve(__dirname, 'words.txt'), 'utf8').split('\n');
+    const wordsArray = fs__default['default'].readFileSync(path__default['default'].resolve(__dirname, 'words.txt'), 'utf8').split('\n');
     const randomInt = crypto__default['default'].randomInt(0, wordsArray.length);
     return wordsArray[randomInt];
 }

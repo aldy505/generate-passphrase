@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import fs from 'fs';
-import { resolve } from 'path';
+import path from 'path';
 
 interface generateOptions {
   length?: number,
@@ -46,7 +46,7 @@ function getRandomPattern(length: number, numbers: boolean): string {
 }
 
 function getRandomWord(): string {
-  const wordsArray = fs.readFileSync(resolve(__dirname, 'words.txt'), 'utf8').split('\n');
+  const wordsArray = fs.readFileSync(path.resolve(__dirname, 'words.txt'), 'utf8').split('\n');
   const randomInt = crypto.randomInt(0, wordsArray.length);
   return wordsArray[randomInt];
 }

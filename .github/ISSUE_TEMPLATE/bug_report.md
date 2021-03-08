@@ -21,8 +21,6 @@ assignees: ''
 ### Versions
 
 - node: <!-- ex: v12.14.0 -->
-- winston: <!-- ex: v3.1.2 -->
-- database: <!-- ex: mysql v8.0.0 -->
 
 ### Reproduction
 
