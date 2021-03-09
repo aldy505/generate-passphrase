@@ -43,6 +43,11 @@ describe('generate-passphrase', () => {
       expect(generated[i]).to.match(/[0-9]/g);
     }
   });
+  it('should works if pattern is undefined', () => {
+    const generated = generate({ pattern: undefined });
+    assert.isString(generated);
+    expect(generated.split('-').length).to.be.equal(4);
+  });
   it('should generate all uppercase word pattern', () => {
     const generated = generate({ numbers: false, uppercase: true }).split('-');
     for (let i = 0; i < generated.length; i += 1) {

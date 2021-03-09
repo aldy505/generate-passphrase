@@ -49,7 +49,7 @@ function generate(options = {}) {
         numbers: true,
         uppercase: false,
         titlecase: false,
-        pattern: '',
+        pattern: null,
     };
     const opts = { ...defaults, ...options };
     const passphraseArray = [];

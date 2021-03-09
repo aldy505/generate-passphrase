@@ -49,11 +49,41 @@ const anotherMultiplePassphrase = generateMultiple(10, { length: 2, uppercase: t
 | numbers | `boolean` | `true` |
 | uppercase | `boolean` | `false` |
 | titlecase | `boolean` | `false` |
-| pattern | `string` | `''` (empty string) |
+| pattern | `string` | `null` |
 
 A few things to note:
  * Uppercase is more prioritized than titlecase. So if you have both options set to `true`, it will be words full of uppercase.
  * Pattern option is more prioritized than length, because you've set the passphrase pattern, hence the module is using the length from your pattern.
+
+## Benchmark a.k.a How slow is this?
+
+**TL;DR:** It's slow.
+
+I'm using:
+* Asus ROG GL553VE
+* Windows 10 Home 64-bit (10.0 Build 18363)
+* Intel Core i7-7700HQ @ 2.80GHz, 8 CPUs
+* 16 GB RAM
+
+Benchmark for single passphrase/password:
+
+| Module | Ops/sec | Accuracy | Runs sampled |
+| --- | --- | --- | --- |
+| generate-passphrase | 8.76 | ±2.92% | 230 |
+| generate-password | 551,350 | ±1.93% | 331 |
+| niceware | 378,754 | ±2.11% | 347 | 
+| randomatic | 12,361 | ±0.97% | 336 |
+
+Benchmark for multiple passphrase/password (`generateMultiple` function):
+
+| Module | Ops/sec | Accuracy | Runs sampled |
+| --- | --- | --- | --- |
+| generate-passphrase | 0.92 | ±0.91% | 156 |
+| generate-password | 61,347 | ±1.20% | 349 |
+
+**Explaination why this module is so slow:**
+
+Both this module and `niceware` uses a file that contains lots of English words. But `niceware`'s file only weigh at 767 KB with 65544 lines of code, compared to this module weigh at 2.76 MB with 274411 lines of code. Is it more unpredictable? Yes, because it has more words.
 
 ## Contributing
 

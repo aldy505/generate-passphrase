@@ -63,7 +63,7 @@ export function generate(options: generateOptions = {}): string {
     numbers: true,
     uppercase: false,
     titlecase: false,
-    pattern: '',
+    pattern: null,
   };
 
   const opts = { ...defaults, ...options };
