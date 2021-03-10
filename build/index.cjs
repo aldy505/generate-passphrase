@@ -15,7 +15,7 @@ var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 let randomBytes;
 let randomIndex;
 function getRandomValue() {
-    if (!randomIndex || randomIndex >= randomBytes.length) {
+    if (randomIndex === undefined || randomIndex >= randomBytes.length) {
         randomBytes = crypto__default['default'].randomBytes(256);
         randomIndex = 0;
     }

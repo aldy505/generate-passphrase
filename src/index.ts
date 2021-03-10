@@ -15,7 +15,7 @@ let randomBytes: Buffer;
 let randomIndex: number;
 
 function getRandomValue(): number {
-  if (!randomIndex || randomIndex >= randomBytes.length) {
+  if (randomIndex === undefined || randomIndex >= randomBytes.length) {
     randomBytes = crypto.randomBytes(256);
     randomIndex = 0;
   }

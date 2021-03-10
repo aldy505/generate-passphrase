@@ -10,10 +10,20 @@ describe('generate-passphrase', () => {
     assert.isString(generated);
     expect(generated.split('-').length).to.be.equal(4);
   });
-  it('should generate multiple passphrase without options', () => {
+  it('should generate 5 multiple passphrase without options', () => {
     const generated = generateMultiple(5);
     assert.isArray(generated);
     expect(generated.length).to.be.equal(5);
+  });
+  it('should generate 10 multiple passphrase without options', () => {
+    const generated = generateMultiple(10);
+    assert.isArray(generated);
+    expect(generated.length).to.be.equal(10);
+  });
+  it('should generate 15 multiple passphrase without options', () => {
+    const generated = generateMultiple(15);
+    assert.isArray(generated);
+    expect(generated.length).to.be.equal(15);
   });
   it('should generate a passphrase with size length', () => {
     const generated = generate({ length: 10 });
@@ -78,13 +88,15 @@ describe('generate-passphrase', () => {
     }
   });
   it('should have all uppercase words and numbers', () => {
-    const generated = generate({ uppercase: true, titlecase: true, numbers: true }).split('-');
+    const generated = generate({
+      pattern: 'WWWNWWNWWN', uppercase: true, titlecase: true, numbers: true,
+    }).split('-');
     for (let i = 0; i < generated.length; i += 1) {
       expect(generated[i]).to.match(/[0-9A-Z]/g);
     }
   });
   it('should have all titlecase words and numbers', () => {
-    const generated = generate({ titlecase: true, numbers: true }).split('-');
+    const generated = generate({ pattern: 'WWWNWWNWWN', titlecase: true, numbers: true }).split('-');
     for (let i = 0; i < generated.length; i += 1) {
       const perWord = generated[i].split('');
       expect(perWord[0]).to.match(/[0-9A-Z]/g);

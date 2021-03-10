@@ -5,7 +5,7 @@ import path from 'path';
 let randomBytes;
 let randomIndex;
 function getRandomValue() {
-    if (!randomIndex || randomIndex >= randomBytes.length) {
+    if (randomIndex === undefined || randomIndex >= randomBytes.length) {
         randomBytes = crypto.randomBytes(256);
         randomIndex = 0;
     }
