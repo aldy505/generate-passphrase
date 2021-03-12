@@ -1,3 +1,8 @@
+/**
+ * @module generate-passphrase
+ * @author Reinaldy Rafli <hi@reinaldyrafli.com>
+ * @license MIT
+ */
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
@@ -25,22 +30,17 @@ function getRandomValue(): number {
 
 function getRandomNumber(max: number): number {
   let rand = getRandomValue();
-  while (rand >= 256 - (256 % max)) {
+  while (rand === undefined || rand >= 256 - (256 % max)) {
     rand = getRandomValue();
   }
   return rand % max;
 }
 
 function getRandomPattern(length: number, numbers: boolean): string {
-  /**
-   * PATTERNS:
-   * N: NUMBER
-   * W: WORD
-   */
   const pool = (numbers) ? 'NWW' : 'WWW';
   let pattern = '';
   for (let i = 0; i < length; i += 1) {
-    pattern += pool[getRandomNumber(pool.length)];
+    pattern += pool[getRandomNumber(2)];
   }
   return pattern;
 }
@@ -67,13 +67,19 @@ export function generate(options: generateOptions = {}): string {
   };
 
   const opts = { ...defaults, ...options };
-  const passphraseArray: Array<string|number> = [];
+
+  if (opts.length === 0) {
+    throw new Error('Length should be 1 or bigger. It should not be zero.');
+  }
+  const passphraseArray: Array<string | number> = [];
+
   let pattern: string;
   if (opts.pattern) {
     pattern = opts.pattern.toUpperCase();
   } else {
     pattern = getRandomPattern(opts.length, opts.numbers);
   }
+
   const eachPattern = pattern.split('');
   for (let i = 0; i < eachPattern.length; i += 1) {
     if (eachPattern[i] === 'N') {
