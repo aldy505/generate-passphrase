@@ -69,17 +69,17 @@ Benchmark for single passphrase/password:
 
 | Module | Ops/sec | Accuracy | Runs sampled |
 | --- | --- | --- | --- |
-| generate-passphrase | 8.76 | ±2.92% | 230 |
-| generate-password | 551,350 | ±1.93% | 331 |
-| niceware | 378,754 | ±2.11% | 347 | 
-| randomatic | 12,361 | ±0.97% | 336 |
+| generate-passphrase | 14.12 | ±4.22% | 253 |
+| generate-password | 551,350 | ±3.77% | 287 |
+| niceware | 333,076 | ±2.59% | 317 | 
+| randomatic | 10,740 | ±2.04% | 312 |
 
 Benchmark for multiple passphrase/password (`generateMultiple` function):
 
 | Module | Ops/sec | Accuracy | Runs sampled |
 | --- | --- | --- | --- |
-| generate-passphrase | 0.92 | ±0.91% | 156 |
-| generate-password | 61,347 | ±1.20% | 349 |
+| generate-passphrase | 1.28 | ±2.40% | 209 |
+| generate-password | 47,050 | ±2.25% | 319 |
 
 **Explaination why this module is so slow:**
 

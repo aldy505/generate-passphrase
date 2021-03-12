@@ -39,10 +39,10 @@ describe('generate-passphrase', function () {
     }
   });
   it('should output error for unknown pattern', function () {
-    expect(function () (generate({ pattern: 'AAA' }))).to.throw('Unknown pattern found. Use N or W instead.');
+    expect(() => generate({ pattern: 'AAA' })).to.throw('Unknown pattern found. Use N or W instead.');
   });
   it('should output error for length = 0', function () {
-    expect(function () generate({ length: 0 })).to.throw('Length should be 1 or bigger. It should not be zero.');
+    expect(() => generate({ length: 0 })).to.throw('Length should be 1 or bigger. It should not be zero.');
   });
   it('should generate all word pattern with pattern: WWWWW', function () {
     const generated = generate({ pattern: 'WWWWW' }).split('-');
