@@ -17,9 +17,11 @@ suite
   .add('niceware single item', () => niceware.generatePassphrase(8), { minSamples: 100, maxTime: 15 })
   .add('randomatic single item', () => randomatic('*', 40), { minSamples: 100, maxTime: 15 })
   .on('cycle', (event) => {
+    // eslint-disable-next-line no-console
     console.log(String(event.target));
   })
   .on('complete', () => {
+    // eslint-disable-next-line no-console
     console.log('Benchmark completed');
   })
   .run({ async: true, minSamples: 500, name: 'Generate-Passphrase Benchmark' });

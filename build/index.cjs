@@ -9,7 +9,7 @@ let randomBytes,randomIndex;function getRandomValue(){return(void 0===randomInde
  * Generate a passphrase with options
  * @param {generateOptions} options - The options
  * @returns {string} - A passphrase
- */function generate(e={}){const t={length:4,separator:"-",numbers:!0,uppercase:!1,titlecase:!1,pattern:null,...e};if(0===t.length)throw new Error("Length should be 1 or bigger. It should not be zero.");const r=[];let n;n=t.pattern?t.pattern.toUpperCase():getRandomPattern(t.length,t.numbers);var a=n.split("");for(let e=0;e<a.length;e+=1)if("N"===a[e])r.push(getRandomValue());else{if("W"!==a[e])throw new Error("Unknown pattern found. Use N or W instead.");{const o=getRandomWord();t.uppercase?r.push(o.toUpperCase()):t.titlecase?r.push(o.replace(/\w\S*/g,e=>e.charAt(0).toUpperCase()+e.substr(1).toLowerCase())):r.push(o)}}return r.join(t.separator)}
+ */function generate(e={}){const t={length:4,separator:"-",numbers:!0,uppercase:!1,titlecase:!1,pattern:null,...e};if(t.length<=0)throw new Error("Length should be 1 or bigger. It should not be zero or lower.");const r=[];let n;n=t.pattern?t.pattern.toUpperCase():getRandomPattern(t.length,t.numbers);var a=n.split("");for(let e=0;e<a.length;e+=1)if("N"===a[e])r.push(getRandomValue());else{if("W"!==a[e])throw new Error("Unknown pattern found. Use N or W instead.");{const o=getRandomWord();t.uppercase?r.push(o.toUpperCase()):t.titlecase?r.push(o.replace(/\w\S*/g,e=>e.charAt(0).toUpperCase()+e.substr(1).toLowerCase())):r.push(o)}}return r.join(t.separator)}
 /**
  * Generate multiple passphrase with the same options
  * @param {number} amount - The number of passphrase returned

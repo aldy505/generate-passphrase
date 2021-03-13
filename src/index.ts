@@ -68,8 +68,8 @@ export function generate(options: generateOptions = {}): string {
 
   const opts = { ...defaults, ...options };
 
-  if (opts.length === 0) {
-    throw new Error('Length should be 1 or bigger. It should not be zero.');
+  if (opts.length <= 0) {
+    throw new Error('Length should be 1 or bigger. It should not be zero or lower.');
   }
   const passphraseArray: Array<string | number> = [];
 
