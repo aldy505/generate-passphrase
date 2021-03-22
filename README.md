@@ -14,9 +14,9 @@ Why is this repo heavy? I'm using [sindresorhus' word-list repo](https://github.
 
 ## Installation
 ```bash
-$ npm install generate-passphrase@next
+$ npm install generate-passphrase
 # or
-$ yarn add generate-passphrase@next
+$ yarn add generate-passphrase
 # or basically any package manager you like.
 ```
 
