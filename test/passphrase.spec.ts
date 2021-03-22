@@ -32,10 +32,29 @@ describe('generate-passphrase', () => {
     assert.isString(generated);
     expect(generated.split('-').length).to.be.equal(10);
   });
+  it('should generate multiple passphrase with size length', function _() {
+    this.timeout(10000);
+    const generated = generateMultiple(5, { length: 10 });
+    for (let i = 0; i < generated.length; i += 1) {
+      const split = generated[i].split('-');
+      assert.isString(generated[i]);
+      expect(split.length).to.be.equal(10);
+    }
+  });
   it('should generate all word pattern with numbers: false', () => {
     const generated = generate({ numbers: false }).split('-');
     for (let i = 0; i < generated.length; i += 1) {
       expect(generated[i]).to.match(/[a-zA-Z]/g);
+    }
+  });
+  it('should generate multiple all word pattern with numbers: false', function _() {
+    this.timeout(10000);
+    const generated = generateMultiple(5, { numbers: false });
+    for (let i = 0; i < generated.length; i += 1) {
+      const split = generated[i].split('-');
+      for (let j = 0; j < split.length; j += 1) {
+        expect(split[j]).to.match(/[a-zA-Z]/g);
+      }
     }
   });
   it('should output error for unknown pattern', () => {

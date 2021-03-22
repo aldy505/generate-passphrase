@@ -1,7 +1,7 @@
 import typescript from 'rollup-plugin-typescript2';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 const override = { compilerOptions: { module: 'ESNext', rootDir: '.' } };
 
@@ -23,7 +23,7 @@ export default {
       include: ['./src/**/*.ts'], exclude: ['./test/**/*.ts'], clean: true, tsconfigOverride: override,
     }),
     nodeResolve(),
-    uglify({ output: { comments: 'all' } }),
+    terser({ format: { comments: 'all' } }),
     copy({
       targets: [
         { src: 'src/words.txt', dest: 'build' },
