@@ -1,6 +1,8 @@
 {
   "semanticCommits": "enabled",
   "extends": [
-    "config:base"
+    ":ignoreUnstable",
+    "group:allNonMajor",
+    "schedule:monthly"
   ]
 }
