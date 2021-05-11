@@ -55,6 +55,7 @@ function getRandomWord(): string {
  * Generate a passphrase with options
  * @param {generateOptions} options - The options
  * @returns {string} - A passphrase
+ * @link https://github.com/aldy505/generate-passphrase#how-to-use-this Usage
  */
 export function generate(options: generateOptions = {}): string {
   const defaults = {
@@ -106,6 +107,7 @@ export function generate(options: generateOptions = {}): string {
  * @param {number} amount - The number of passphrase returned
  * @param {generateOptions} options - The options
  * @returns {Array<string>} - Array of passphrases
+ * @link https://github.com/aldy505/generate-passphrase#how-to-use-this Usage
  */
 export function generateMultiple(amount: number, options: generateOptions = {}): Array<string> {
   const passphrase = [];
