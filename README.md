@@ -4,6 +4,12 @@
 
 > ✨Zero dependency module for generating passphrase.
 
+* 🚀 Simple passphrase generator with simple config
+* ✨ ESM support
+* 🔑 Cryptographically secure
+* 📕 Built-in Typescript typings
+* 🎊 Supports Node.js 10 and higher
+
 The code is close to node [generate-password](https://github.com/brendanashworth/generate-password) repo. But this is for a passphrase, with English language.
 
 ProtonMail has a [decent article](https://protonmail.com/blog/protonmail-com-blog-password-vs-passphrase/) explaining about password vs passphrase. 
