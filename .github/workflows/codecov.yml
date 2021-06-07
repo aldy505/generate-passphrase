@@ -22,11 +22,10 @@ jobs:
         node-version: ">=14"
 
     - name: Installing dependencies
-      run: |
-        npm install
+      run: yarn install
 
     - name: Running test
-      run: npm run test
+      run: yarn run test
 
     - name: Upload to Codecov
       uses: codecov/codecov-action@v1
