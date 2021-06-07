@@ -1,6 +1,6 @@
 {
   "name": "generate-passphrase",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero dependency module - Secure random passphrase",
   "main": "build/index.cjs",
   "module": "build/index.js",
