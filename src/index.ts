@@ -5,7 +5,7 @@
  */
 import crypto from 'crypto';
 import {readFileSync} from 'fs';
-import {resolve} from 'path/posix';
+import {resolve} from 'path';
 
 interface generateOptions {
   length?: number,

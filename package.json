@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/aldy505/generate-passphrase#readme",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "directories": {
     "test": "./test",
