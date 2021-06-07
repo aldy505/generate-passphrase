@@ -1,8 +1,0 @@
-{
-  "semanticCommits": "enabled",
-  "extends": [
-    ":ignoreUnstable",
-    "group:allNonMajor",
-    "schedule:monthly"
-  ]
-}

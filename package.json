@@ -23,12 +23,12 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint --ignore-path .gitignore .",
-    "lint:fix": "eslint --fix --ignore-path .gitignore .",
-    "coverage": "nyc npm run mocha",
-    "mocha": "mocha -r ts-node/register test/**/*.spec.ts --exit",
-    "pretest": "rimraf build && npm run lint && npm run build",
-    "test": "npm run coverage",
+    "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
+    "lint:fix": "eslint --ext .js,.ts --fix --ignore-path .gitignore .",
+    "coverage": "nyc yarn run uvu",
+    "uvu": "uvu -r ts-node/register test",
+    "pretest": "rimraf build && yarn run lint && yarn run build",
+    "test": "yarn run coverage",
     "benchmark": "node benchmark/benchmark"
   },
   "repository": {
@@ -41,7 +41,7 @@
     "secure",
     "random"
   ],
-  "author": "Reinaldy Rafli <reinaldyrfl@gmail.com>",
+  "author": "Reinaldy Rafli <aldy505@tutanota.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aldy505/generate-passphrase/issues"
@@ -54,33 +54,36 @@
     "test": "./test",
     "lib": "./src"
   },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.1",
     "@rollup/plugin-node-resolve": "13.0.0",
-    "@types/chai": "4.2.18",
-    "@types/mocha": "8.2.2",
-    "@types/node": "15.0.2",
-    "@typescript-eslint/eslint-plugin": "4.23.0",
-    "@typescript-eslint/parser": "4.23.0",
+    "@types/node": "15.12.1",
+    "@typescript-eslint/eslint-plugin": "4.26.0",
+    "@typescript-eslint/parser": "4.26.0",
     "benchmark": "2.1.4",
-    "chai": "4.3.4",
-    "eslint": "7.26.0",
-    "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.22.1",
+    "commitizen": "4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "7.28.0",
+    "eslint-config-xo-space": "^0.27.0",
     "generate-password": "1.6.0",
     "microtime": "3.0.0",
-    "mocha": "8.4.0",
     "niceware": "2.0.2",
     "nyc": "15.1.0",
     "randomatic": "3.1.1",
     "rimraf": "3.0.2",
-    "rollup": "2.47.0",
+    "rollup": "2.51.0",
     "rollup-plugin-copy": "3.4.0",
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.30.0",
     "source-map-support": "0.5.19",
-    "ts-node": "9.1.1",
+    "ts-node": "10.0.0",
     "tslib": "2.2.0",
-    "typescript": "4.2.4"
+    "typescript": "4.3.2",
+    "uvu": "0.5.1"
   }
 }
