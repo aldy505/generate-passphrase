@@ -1,9 +1,6 @@
-import typescript from 'rollup-plugin-typescript2';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
+import ts from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
 import {terser} from 'rollup-plugin-terser';
-
-const override = {compilerOptions: {module: 'ESNext', rootDir: '.'}};
 
 export default {
   input: 'src/index.ts',
@@ -17,12 +14,11 @@ export default {
       format: 'esm'
     }
   ],
-  external: [],
+  external: ['crypto', 'fs', 'path'],
   plugins: [
-    typescript({
-      include: ['./src/**/*.ts'], exclude: ['./test/**/*.ts'], clean: true, tsconfigOverride: override
+    ts({
+      include: ['./src/**/*.ts']
     }),
-    nodeResolve(),
     terser({format: {comments: 'all'}}),
     copy({
       targets: [
