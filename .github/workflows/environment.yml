@@ -34,7 +34,7 @@ jobs:
         run: yarn run lint
       
       - name: Build
-        run: yarn  run build
+        run: yarn run build
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
