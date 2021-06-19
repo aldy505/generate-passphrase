@@ -2,22 +2,22 @@
   "name": "generate-passphrase",
   "version": "1.0.1",
   "description": "Zero dependency module - Secure random passphrase",
-  "main": "build/index.cjs",
-  "module": "build/index.js",
-  "types": "build/src/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./build/index.js",
-      "require": "./build/index.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json",
     "./*": "./*"
   },
   "files": [
-    "build/index.cjs",
-    "build/index.js",
-    "build/words.txt",
-    "build/src/index.d.ts",
+    "dist/index.cjs",
+    "dist/index.js",
+    "dist/words.txt",
+    "dist/index.d.ts",
     "README.md",
     "LICENSE"
   ],
