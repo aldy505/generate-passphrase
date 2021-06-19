@@ -41,7 +41,16 @@ const anotherPassphrase = generate({ length: 3, separator: '.', titlecase: true 
 const multiplePassphrase = generateMultiple(3)
 // ['pinocytotically-loricated-prithee-hypnotizer', 'sambaing-phenotypically-singlesticks-239', ... ]
 const anotherMultiplePassphrase = generateMultiple(10, { length: 2, uppercase: true, numbers: false })
+```
 
+I know some of us need to generate it fast just for the sake of it, you can add `fast` as a parameter. (It defaults to false). Please bear in mind, this would make the returning random passphrase **not cryptographically secure**
+
+```js
+const fast = generate({ fast: true })
+// cultivars-strigose-avisements-58
+
+const extraFast = generateMultiple(5, { fast: true })
+// ['extrorsal-169-resultlessness-168', 'postmodern-kolkhozniki-skulkers-99', ... ]
 ```
 
 ## Options
@@ -54,6 +63,7 @@ const anotherMultiplePassphrase = generateMultiple(10, { length: 2, uppercase: t
 | uppercase | `boolean` | `false` |
 | titlecase | `boolean` | `false` |
 | pattern | `string` | `null` |
+| fast | `boolean` | `false` |
 
 A few things to note:
  * Uppercase is more prioritized than titlecase. So if you have both options set to `true`, it will be words full of uppercase.
@@ -61,7 +71,7 @@ A few things to note:
 
 ## Benchmark a.k.a How slow is this?
 
-**TL;DR:** It's slow.
+~~**TL;DR:** It's slow.~~ On v1.1.0, I managed to get the algorithm runs a lot faster. There is also an additional `fast` option if you're just aiming for the speed.
 
 I'm using:
 * Asus ROG GL553VE
@@ -73,21 +83,19 @@ Benchmark for single passphrase/password:
 
 | Module | Ops/sec | Accuracy | Runs sampled |
 | --- | --- | --- | --- |
-| generate-passphrase | 14.12 | ±4.22% | 253 |
-| generate-password | 551,350 | ±3.77% | 287 |
-| niceware | 333,076 | ±2.59% | 317 | 
-| randomatic | 10,740 | ±2.04% | 312 |
+| generate-passphrase | 117,546 | ±2.32% | 385 |
+| generate-passphrase (`fast` enabled) | 653,668 | ±1.07% | 444 |
+| generate-password | 434,495 | ±1.49% | 332 |
+| niceware | 207,719 | ±5.79% | 232 | 
+| randomatic | 8,026 | ±2.23% | 319 |
 
 Benchmark for multiple passphrase/password (`generateMultiple` function):
 
 | Module | Ops/sec | Accuracy | Runs sampled |
 | --- | --- | --- | --- |
-| generate-passphrase | 1.28 | ±2.40% | 209 |
-| generate-password | 47,050 | ±2.25% | 319 |
-
-**Explaination why this module is so slow:**
-
-Both this module and `niceware` uses a file that contains lots of English words. But `niceware`'s file only weigh at 767 KB with 65544 lines of code, compared to this module weigh at 2.76 MB with 274411 lines of code. Is it more unpredictable? Yes, because it has more words.
+| generate-passphrase | 12,338 | ±1.80% | 407 |
+| generate-passphrase (`fast` enabled) | 64,124 | ±1.51% | 441 |
+| generate-password | 43,775 | ±2.15% | 317 |
 
 ## Contributing
 
