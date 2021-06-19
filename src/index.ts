@@ -7,13 +7,14 @@ import crypto from 'crypto';
 import {readFileSync} from 'fs';
 import {resolve} from 'path';
 
-interface generateOptions {
-  length?: number,
-  separator?: string,
-  numbers?: boolean,
-  uppercase?: boolean,
-  titlecase?: boolean,
+export interface generateOptions {
+  length?: number
+  separator?: string
+  numbers?: boolean
+  uppercase?: boolean
+  titlecase?: boolean
   pattern?: string
+  fast?: boolean
 }
 
 let randomBytes: Buffer;
@@ -29,7 +30,11 @@ function getRandomValue(): number {
   return randomBytes[randomIndex];
 }
 
-function getRandomNumber(max: number): number {
+function getRandomNumber(max: number, fast = false): number {
+  if (fast) {
+    return Math.floor(Math.random() * max);
+  }
+
   let rand = getRandomValue();
   while (rand === undefined || rand >= 256 - (256 % max)) {
     rand = getRandomValue();
@@ -38,19 +43,19 @@ function getRandomNumber(max: number): number {
   return rand % max;
 }
 
-function getRandomPattern(length: number, numbers: boolean): string {
+function getRandomPattern(length: number, numbers: boolean, fast = false): string {
   const pool = (numbers) ? 'NWW' : 'WWW';
   let pattern = '';
   for (let i = 0; i < length; i++) {
-    pattern += pool[getRandomNumber(2)];
+    pattern += pool[getRandomNumber(2, fast)];
   }
 
   return pattern;
 }
 
-function getRandomWord(): string {
-  const words = readFileSync(resolve(__dirname, './words.txt'), 'utf8').split('\n');
-  const randomInt = crypto.randomInt(0, words.length);
+const words = readFileSync(resolve(__dirname, './words.txt'), 'utf8').split('\n');
+function getRandomWord(fast = false): string {
+  const randomInt = fast ? Math.floor(Math.random() * words.length) : crypto.randomInt(0, words.length);
   return words[randomInt];
 }
 
@@ -61,13 +66,14 @@ function getRandomWord(): string {
  * @see Usage https://github.com/aldy505/generate-passphrase#how-to-use-this
  */
 export function generate(options: generateOptions = {}): string {
-  const defaults = {
+  const defaults: generateOptions = {
     length: 4,
     separator: '-',
     numbers: true,
     uppercase: false,
     titlecase: false,
-    pattern: null
+    pattern: null,
+    fast: false,
   };
 
   const opts = {...defaults, ...options};
@@ -82,7 +88,7 @@ export function generate(options: generateOptions = {}): string {
   if (opts.pattern) {
     pattern = opts.pattern.toUpperCase();
   } else {
-    pattern = getRandomPattern(opts.length, opts.numbers);
+    pattern = getRandomPattern(opts.length, opts.numbers, opts.fast);
   }
 
   const eachPattern = pattern.split('');
@@ -90,7 +96,7 @@ export function generate(options: generateOptions = {}): string {
     if (eachPattern[i] === 'N') {
       passphraseArray.push(getRandomValue());
     } else if (eachPattern[i] === 'W') {
-      const word = getRandomWord();
+      const word = getRandomWord(opts.fast);
       if (opts.uppercase) {
         passphraseArray.push(word.toUpperCase());
       } else if (opts.titlecase) {
@@ -111,10 +117,10 @@ export function generate(options: generateOptions = {}): string {
  * Generate multiple passphrase with the same options
  * @param {number} amount - The number of passphrase returned
  * @param {generateOptions} options - The options
- * @returns {Array<string>} - Array of passphrases
+ * @returns {string[]} - Array of passphrases
  * @see Usage https://github.com/aldy505/generate-passphrase#how-to-use-this
  */
-export function generateMultiple(amount: number, options: generateOptions = {}): Array<string> {
+export function generateMultiple(amount: number, options: generateOptions = {}): string[] {
   const passphrase = [];
   for (let i = 0; i < amount; i++) {
     passphrase[i] = generate(options);

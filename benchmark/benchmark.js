@@ -2,16 +2,17 @@ const Benchmark = require('benchmark');
 const niceware = require('niceware');
 const generatePassword = require('generate-password');
 const randomatic = require('randomatic');
-const generatePassphrase = require('../build/index.cjs');
+const generatePassphrase = require('../dist/index.cjs');
 
 const suite = new Benchmark.Suite();
 
 suite
   .add('generate-passphrase single item', () => generatePassphrase.generate(), {minSamples: 200, maxTime: 15})
   .add('generate-passphrase multiple items', () => generatePassphrase.generateMultiple(10), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase single item with fast', () => generatePassphrase.generate({fast: true}), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase multiple item with fast', () => generatePassphrase.generateMultiple(10, {fast: true}), {minSamples: 200, maxTime: 15})
   .add('generate-password single item', () => generatePassword.generate({length: 40}), {minSamples: 100, maxTime: 15})
   .add('generate-password multiple items', () => generatePassword.generateMultiple(10, {length: 40}), {minSamples: 100, maxTime: 15})
-  // @ts-ignore
   .add('niceware single item', () => niceware.generatePassphrase(8), {minSamples: 100, maxTime: 15})
   .add('randomatic single item', () => randomatic('*', 40), {minSamples: 100, maxTime: 15})
   .on('cycle', event => {
