@@ -10,8 +10,8 @@ export default {
       format: 'cjs',
     },
     {
-      file: 'dist/index.js',
-      format: 'esm',
+      file: 'dist/index.mjs',
+      format: 'es',
     },
   ],
   external: ['crypto', 'fs', 'path'],
