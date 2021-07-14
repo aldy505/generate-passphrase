@@ -1,6 +1,6 @@
 /**
  * @module generate-passphrase
- * @author Reinaldy Rafli <hi@reinaldyrafli.com>
+ * @author Reinaldy Rafli <aldy505@tutanota.com>
  * @license MIT
  */
 import crypto from 'crypto';
