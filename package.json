@@ -3,11 +3,11 @@
   "version": "1.1.0",
   "description": "Zero dependency module - Secure random passphrase",
   "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json",
@@ -15,7 +15,7 @@
   },
   "files": [
     "dist/index.cjs",
-    "dist/index.js",
+    "dist/index.mjs",
     "dist/words.txt",
     "dist/index.d.ts",
     "README.md",
