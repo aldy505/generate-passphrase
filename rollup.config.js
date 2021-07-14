@@ -14,10 +14,10 @@ export default {
       format: 'es',
     },
   ],
-  external: ['crypto', 'fs', 'path'],
+  external: ['crypto', 'fs', 'path', 'url'],
   plugins: [
     ts(),
-    terser({format: {comments: 'all'}}),
+    // terser({format: {comments: 'all'}}),
     copy({
       targets: [
         {src: 'src/words.txt', dest: 'dist'},

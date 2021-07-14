@@ -1,10 +1,10 @@
 {
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "ESNext"
     },
     "include": [
-      "tests/**/*"
+      "test/**/*"
     ]
   },
   "compilerOptions": {

@@ -37,7 +37,6 @@ opts('should generate all word pattern with pattern: WWWWW', () => {
 
 opts('should generate all number pattern with pattern: NNNNN', () => {
   const generated = generate({pattern: 'NNNNN'}).split('-');
-  console.log(generated);
   assert.is(generated.length, 5);
   for (let i = 0; i < generated.length; i += 1) {
     assert.match(generated[i], /[0-9]/g);
