@@ -1,16 +1,16 @@
-const Benchmark = require('benchmark');
-const niceware = require('niceware');
-const generatePassword = require('generate-password');
-const randomatic = require('randomatic');
-const generatePassphrase = require('../dist/index.cjs');
+import benchmark from 'benchmark';
+import niceware from 'niceware';
+import generatePassword from 'generate-password';
+import randomatic from 'randomatic';
+import {generate, generateMultiple} from '../dist/index.mjs';
 
-const suite = new Benchmark.Suite();
+const suite = new benchmark.Suite();
 
 suite
-  .add('generate-passphrase single item', () => generatePassphrase.generate(), {minSamples: 200, maxTime: 15})
-  .add('generate-passphrase multiple items', () => generatePassphrase.generateMultiple(10), {minSamples: 200, maxTime: 15})
-  .add('generate-passphrase single item with fast', () => generatePassphrase.generate({fast: true}), {minSamples: 200, maxTime: 15})
-  .add('generate-passphrase multiple item with fast', () => generatePassphrase.generateMultiple(10, {fast: true}), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase single item', () => generate(), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase multiple items', () => generateMultiple(10), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase single item with fast', () => generate({fast: true}), {minSamples: 200, maxTime: 15})
+  .add('generate-passphrase multiple item with fast', () => generateMultiple(10, {fast: true}), {minSamples: 200, maxTime: 15})
   .add('generate-password single item', () => generatePassword.generate({length: 40}), {minSamples: 100, maxTime: 15})
   .add('generate-password multiple items', () => generatePassword.generateMultiple(10, {length: 40}), {minSamples: 100, maxTime: 15})
   .add('niceware single item', () => niceware.generatePassphrase(8), {minSamples: 100, maxTime: 15})
