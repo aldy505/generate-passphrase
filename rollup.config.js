@@ -1,8 +1,8 @@
-import ts from 'rollup-plugin-typescript2';
+import ts from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
-import {terser} from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
-export default {
+const config = {
   input: 'src/index.ts',
   output: [
     {
@@ -25,3 +25,5 @@ export default {
     }),
   ],
 };
+
+export default config;
