@@ -9,7 +9,8 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./package.json": "./package.json",
     "./*": "./*"
@@ -24,12 +25,12 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
-    "lint:fix": "eslint --ext .js,.ts --fix --ignore-path .gitignore .",
-    "coverage": "c8 --reporter=text --reporter=lcov yarn run uvu",
-    "uvu": "node --experimental-loader esbuild-node-loader node_modules/uvu/bin.js test",
-    "pretest": "rimraf build && yarn run lint && yarn run build",
-    "test": "yarn run coverage",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "coverage": "c8 --reporter=text --reporter=lcov npm run uvu",
+    "uvu": "node --experimental-loader @esbuild-kit/esm-loader node_modules/uvu/bin.js test",
+    "pretest": "rimraf build && npm run lint && npm run build",
+    "test": "npm run coverage",
     "benchmark": "node benchmark/benchmark"
   },
   "repository": {
@@ -42,14 +43,14 @@
     "secure",
     "random"
   ],
-  "author": "Reinaldy Rafli <aldy505@tutanota.com>",
+  "author": "Reinaldy Rafli <aldy505@proton.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aldy505/generate-passphrase/issues"
   },
   "homepage": "https://github.com/aldy505/generate-passphrase#readme",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "directories": {
     "test": "./test",
@@ -61,26 +62,23 @@
     }
   },
   "devDependencies": {
-    "@types/node": "16.3.2",
-    "@typescript-eslint/eslint-plugin": "4.28.3",
-    "@typescript-eslint/parser": "4.28.3",
+    "@esbuild-kit/esm-loader": "^2.5.5",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@types/node": "20.3.2",
     "benchmark": "2.1.4",
-    "c8": "7.7.3",
-    "commitizen": "4.2.4",
+    "c8": "8.0.0",
+    "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "esbuild-node-loader": "^0.1.1",
-    "eslint": "7.30.0",
-    "eslint-config-xo-space": "^0.28.0",
-    "generate-password": "1.6.0",
-    "microtime": "3.0.0",
-    "niceware": "2.0.2",
+    "generate-password": "1.7.0",
+    "microtime": "3.1.1",
+    "niceware": "4.0.0",
     "randomatic": "3.1.1",
-    "rimraf": "3.0.2",
-    "rollup": "2.53.1",
+    "rimraf": "5.0.1",
+    "rollup": "3.25.3",
     "rollup-plugin-copy": "3.4.0",
-    "rollup-plugin-terser": "7.0.2",
-    "rollup-plugin-typescript2": "0.30.0",
-    "typescript": "4.3.5",
-    "uvu": "0.5.1"
+    "typescript": "5.1.3",
+    "uvu": "0.5.6",
+    "xo": "^0.54.2"
   }
 }

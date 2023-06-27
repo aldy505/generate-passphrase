@@ -1,0 +1,7 @@
+{
+  "space": true,
+  "envs": ["es2021", "node", "browser"],
+  "rules": {
+    "import/extensions": "off"
+  }
+}

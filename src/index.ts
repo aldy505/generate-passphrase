@@ -1,25 +1,26 @@
 /**
  * @module generate-passphrase
- * @author Reinaldy Rafli <aldy505@tutanota.com>
+ * @author Reinaldy Rafli <aldy505@proton.me>
  * @license MIT
  */
-import crypto from 'crypto';
-import {readFileSync} from 'fs';
-import {resolve, dirname} from 'path';
-import {fileURLToPath} from 'url';
+import crypto from 'node:crypto';
+import {readFileSync} from 'node:fs';
+import {resolve, dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {type Buffer} from 'node:buffer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export interface generateOptions {
-  length?: number
-  separator?: string
-  numbers?: boolean
-  uppercase?: boolean
-  titlecase?: boolean
-  pattern?: string
-  fast?: boolean
-}
+export type GenerateOptions = {
+  length: number;
+  separator: string;
+  numbers: boolean;
+  uppercase: boolean;
+  titlecase: boolean;
+  pattern?: string;
+  fast: boolean;
+};
 
 let randomBytes: Buffer;
 let randomIndex: number;
@@ -65,46 +66,41 @@ function getRandomWord(fast = false): string {
 
 /**
  * Generate a passphrase with options
- * @param {generateOptions} options - The options
+ * @param {GenerateOptions} options - The options
  * @returns {string} - A passphrase
  * @see Usage https://github.com/aldy505/generate-passphrase#how-to-use-this
  */
-export function generate(options: generateOptions = {}): string {
-  const defaults: generateOptions = {
+export function generate(options: Partial<GenerateOptions> = {}): string {
+  const defaults: GenerateOptions = {
     length: 4,
     separator: '-',
     numbers: true,
     uppercase: false,
     titlecase: false,
-    pattern: null,
+    pattern: undefined,
     fast: false,
   };
 
-  const opts = {...defaults, ...options};
+  const options_ = {...defaults, ...options};
 
-  if (opts.length <= 0) {
+  if (options_.length <= 0) {
     throw new Error('Length should be 1 or bigger. It should not be zero or lower.');
   }
 
   const passphraseArray: Array<string | number> = [];
 
-  let pattern: string;
-  if (opts.pattern) {
-    pattern = opts.pattern.toUpperCase();
-  } else {
-    pattern = getRandomPattern(opts.length, opts.numbers, opts.fast);
-  }
+  const pattern = options_.pattern ? options_.pattern.toUpperCase() : getRandomPattern(options_.length, options_.numbers, options_.fast);
 
-  const eachPattern = pattern.split('');
-  for (let i = 0; i < eachPattern.length; i += 1) {
-    if (eachPattern[i] === 'N') {
+  const eachPattern = [...pattern];
+  for (const element of eachPattern) {
+    if (element === 'N') {
       passphraseArray.push(getRandomValue());
-    } else if (eachPattern[i] === 'W') {
-      const word = getRandomWord(opts.fast);
-      if (opts.uppercase) {
+    } else if (element === 'W') {
+      const word = getRandomWord(options_.fast);
+      if (options_.uppercase) {
         passphraseArray.push(word.toUpperCase());
-      } else if (opts.titlecase) {
-        passphraseArray.push(word.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substr(1).toLowerCase()));
+      } else if (options_.titlecase) {
+        passphraseArray.push(word.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()));
       } else {
         passphraseArray.push(word);
       }
@@ -113,18 +109,18 @@ export function generate(options: generateOptions = {}): string {
     }
   }
 
-  const passphrase = passphraseArray.join(opts.separator);
+  const passphrase = passphraseArray.join(options_.separator);
   return passphrase;
 }
 
 /**
  * Generate multiple passphrase with the same options
  * @param {number} amount - The number of passphrase returned
- * @param {generateOptions} options - The options
+ * @param {GenerateOptions} options - The options
  * @returns {string[]} - Array of passphrases
  * @see Usage https://github.com/aldy505/generate-passphrase#how-to-use-this
  */
-export function generateMultiple(amount: number, options: generateOptions = {}): string[] {
+export function generateMultiple(amount: number, options: Partial<GenerateOptions> = {}): string[] {
   const passphrase = [];
   for (let i = 0; i < amount; i++) {
     passphrase[i] = generate(options);

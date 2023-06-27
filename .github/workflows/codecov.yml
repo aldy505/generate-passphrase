@@ -2,9 +2,9 @@ name: Codecov Code Coverage
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "*" ]
 
 jobs:
   codecov-code-coverage:
@@ -14,20 +14,18 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: lts/*
 
     - name: Installing dependencies
-      run: yarn install
+      run: npm install
 
     - name: Running test
-      run: yarn run test
+      run: npm run test
 
     - name: Upload to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+      uses: codecov/codecov-action@v3
